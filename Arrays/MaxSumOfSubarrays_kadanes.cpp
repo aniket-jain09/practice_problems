@@ -5,16 +5,13 @@ using namespace std;
 
 int printSubarray(int arr[], int n)
 {
-    int currentSum=0, maxSum=-1;
+    int currentSum=0, maxSum=arr[0];
     for(int i=0; i<n; i++)
     {
-        currentSum = 0;
-        for(int j=i; j<n; j++)
-        {
-                currentSum = currentSum + arr[j];
-            if(currentSum>maxSum)
-            maxSum=currentSum;
-        }
+        currentSum = currentSum + arr[i];
+        maxSum=max(currentSum,maxSum);
+        if(currentSum<0)
+        currentSum=0;
     }
     return maxSum;
 }

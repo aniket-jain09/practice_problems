@@ -85,6 +85,58 @@ void insertAtMiddle(node*&head, int d, int p)       // insert at middle of Linke
     }
 } 
 
+void deleteHead(node*&head)
+{
+    if(head==NULL)
+    return;
+    node*temp = head->next;
+    delete head;
+    head = temp;
+}
+
+void deleteTail(node*head)
+{
+    if(head==NULL)
+    return;
+    node*tail;
+    while (head->next!=NULL)
+    {
+        tail = head;
+        head = head -> next;   
+    }
+
+    delete head;
+    tail -> next = NULL;
+}
+
+void deleteMiddle(node*head, int p)
+{
+    if(head==NULL)
+    return;
+    if(p==0)
+    {
+    deleteHead(head);
+    return;
+    }
+    else if(p>=length(head))
+    {
+        deleteTail(head);
+        return;
+    }
+    else
+    {
+        node* temp = head;
+        while(p!=0)
+        {
+            temp = head;
+            head = head->next;
+            p--;
+        }
+        temp -> next = head -> next;
+        delete head;
+    }
+}
+
 void printList(node*head)
 {
     while(head!=NULL)
@@ -93,6 +145,35 @@ void printList(node*head)
         head = head->next;
     }
     cout<<endl;
+}
+
+bool search(node*head, int d)
+{
+    if(head==NULL)
+    return false;
+    while(head->next!=NULL)
+    {
+        head=head->next;
+        if(head->data == d)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool searchRecusive(node*head, int d)
+{
+    if(head==NULL)
+    return false;
+    else if(head->data == d)
+    return true;
+    else
+    {
+        //head=head->next;
+        return searchRecusive(head->next, d);
+    }
+    
 }
 
 int main()
@@ -106,5 +187,16 @@ int main()
     insertAtMiddle(head,4, 3);
     insertAtTail(head,7);
     printList(head);
+    deleteHead(head);
+    printList(head);
+    deleteTail(head);
+    printList(head);
+    deleteMiddle(head,2);
+    printList(head);
+    if(searchRecusive(head, 5))
+    {
+        cout<<"found";
+    }
+    else cout<<"not found";
     return 0;
 }

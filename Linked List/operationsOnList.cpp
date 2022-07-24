@@ -176,10 +176,75 @@ bool searchRecusive(node*head, int d)
     
 }
 
+void insert(node* head, node* temp)
+{
+    node* temp2 = head;
+    while(head->next!=NULL)
+    {
+        head = head->next;
+    }
+    head->next = temp;
+    temp->next = NULL;
+    
+}
+
+node* insert()
+    {
+        int d;
+        cin>>d;
+        node*head = NULL;
+        while(d!=-1)
+        {
+            insertAtTail(head,d);
+            cin>>d;
+        }
+        return head;
+    }
+
+node* reverse(node*head)
+{
+    if(head == NULL)
+    {
+        return head;
+    }
+    if(head->next == NULL)
+    {
+        return head;
+    }
+
+    node* temp = head;
+
+    head = reverse(head->next);
+
+    insert(head, temp);
+
+    return head;
+}
+
+node* itrReverse(node*head)
+{
+    node* current = head;
+    node* prev = NULL;
+    node* n;
+
+    while(current!=NULL){
+    n = current-> next;
+    current -> next = prev;
+
+    prev = current;
+    current = n;
+    }
+
+    head = prev;
+
+    return head;
+
+}
+
 int main()
 {
     node*head = NULL;
-    insertAtHead(head, 5);
+    /* insertAtHead(head, 5);
     insertAtHead(head, 2);
     insertAtHead(head, 1);
     insertAtHead(head, 0);
@@ -187,6 +252,10 @@ int main()
     insertAtMiddle(head,4, 3);
     insertAtTail(head,7);
     printList(head);
+    cout<<"\n";
+    head = reverse(head);
+    printList(head);
+    cout<<"\n";
     deleteHead(head);
     printList(head);
     deleteTail(head);
@@ -198,5 +267,11 @@ int main()
         cout<<"found";
     }
     else cout<<"not found";
+    head = reverse(head);
+    printList(head); */
+    head = insert();
+    printList(head);
+    head = reverse(head);
+    printList(head);
     return 0;
 }

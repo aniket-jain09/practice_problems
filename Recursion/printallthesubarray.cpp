@@ -31,7 +31,7 @@ void printsubarray(vector<char> ip, vector<char> op){
 
 int main()
 {
-    vector<char> ip = {'a','b'};
+    vector<char> ip = {'a','a','b'};
     vector<char> op;
     printsubarray(ip, op);
     return 0;
